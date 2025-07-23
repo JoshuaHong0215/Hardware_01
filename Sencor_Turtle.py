@@ -65,7 +65,7 @@ t.pendown()
 
 # === 거리 기록 ===
 distance_list = []
-
+avoid_positions = []
 
 def custom_forward(turtle_obj, dist):
     turtle_obj.forward(dist)
@@ -96,6 +96,11 @@ def avoid_obstacle():
     t.forward(move_distance)
     print(f"{move_distance}픽셀 이동 완료")
     distance_list.append(move_distance)
+    
+# === 회피 좌표 저장 및 표시 ===
+    pos = t.pos()
+    avoid_positions.append(pos)
+    t.dot(10, "red")  # 현재 위치에 빨간 점 찍기
 
 
 # ==== 메인 실행 ====
@@ -138,6 +143,18 @@ def main():
 
     print(f"총 이동 거리: {sum(distance_list)} 픽셀")
     print(f"최종 거북이 위치: {t.pos()}")
+    
+# 결과 출력
+    print(f"총 이동 거리: {sum(distance_list)} 픽셀")
+    print(f"최종 거북이 위치: {t.pos()}")
+
+# === 회피 좌표 출력 ===
+    if avoid_positions:
+        print("회피했던 좌표 목록:")
+        for idx, pos in enumerate(avoid_positions, 1):
+            print(f"{idx}. {pos}")
+    else:
+        print("회피한 장애물이 없었습니다.")
 
 
 if __name__ == "__main__":
